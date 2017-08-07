@@ -43,7 +43,8 @@ asm (
 "   mov   r11, r6           \n"
 "   mov   sp,  r7           \n"
 "   ldmia r1!, {r3-r7}      \n"
+"   mov   lr,  r3           \n"
 
 "jmp_ctx_ret:               \n"
-"   bx r3                   \n"
+"   bx    lr                \n"
 );
