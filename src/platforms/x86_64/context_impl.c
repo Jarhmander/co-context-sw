@@ -21,7 +21,7 @@ void init_ctx(struct ctx_t *init, void (*fn)(void *), void *stack_bottom, size_t
 asm (
 "   .globl jmp_ctx              \n"
 "jmp_ctx:                       \n"
-"   movq    0(%rsp),  %r11      \n"
+"   popq    %r11                \n"
 "   test    %rdi,     %rdi      \n"
 "   jz      jmp_ctx_load        \n"
 "   movq    %rbp,     0(%rdi)   \n"
@@ -46,11 +46,10 @@ asm (
 "   ldmxcsr 48(%rsi)            \n"
 "   movq    56(%rsi), %r11      \n"
 "   movq    64(%rsi), %rsp      \n"
-"   movq    %r11,     0(%rsp)   \n"
 
 "jmp_ctx_ret:                   \n"
 "   movq    %rdx,     %rax      \n"
 "   movq    %rdx,     %rdi      \n"
 
-"   retq                        \n"
+"   jmp    *%r11                \n"
 );
