@@ -18,19 +18,17 @@ void init_ctx(struct ctx_t *init, void (*fn)(void *), void *stack_bottom, size_t
 
 // void *jmp_ctx(struct ctx_t *cur, struct ctx_t *next, void *arg)
 asm (
-"   .globl jmp_ctx          \n"
-"jmp_ctx:                   \n"
-"   cmp   r0,  #0           \n"
-"   beq   jmp_ctx_load      \n"
-"   stmia r0!, {r4-r11, lr} \n"
-"   str   sp,  [r0]         \n"
+"   .globl jmp_ctx              \n"
+"jmp_ctx:                       \n"
+"   cbz   r0, jmp_ctx_load      \n"
+"   stmia r0!, {r4-r11, lr}     \n"
+"   str   sp,  [r0]             \n"
 
-"jmp_ctx_load:              \n"
-"   mov   r0,  r2           \n"
-"   cmp   r1,  #0           \n"
-"   bne   jmp_ctx_do_load   \n"
-"   bx    lr                \n"
-"jmp_ctx_do_load:           \n"
-"   ldr   sp,  [r1, #36]    \n"
-"   ldmia r1,  {r4-r11, pc} \n"
+"jmp_ctx_load:                  \n"
+"   mov   r0,  r2               \n"
+"   cbnz  r1,  jmp_ctx_do_load  \n"
+"   bx    lr                    \n"
+"jmp_ctx_do_load:               \n"
+"   ldr   sp,  [r1, #36]        \n"
+"   ldmia r1,  {r4-r11, pc}     \n"
 );
