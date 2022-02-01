@@ -1,4 +1,4 @@
-DIRS:=coroutine setjmp_longjmp
+DIRS:=coroutine setjmp_longjmp test_float
 CLEANDIRS:=$(addsuffix .clean,${DIRS})
 
 .PHONY: all clean ${DIRS}
