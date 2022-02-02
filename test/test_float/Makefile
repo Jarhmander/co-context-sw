@@ -1,8 +1,8 @@
 TARGET := test_float
 SRC    := main.c \
-		  ../../src/platforms/x86_64/context_impl.c
+		  ../../src/platforms/x86_64-systemv-abi/context_impl.c
 
-INC    := $(addprefix -I, ../../include/ ../../include/platforms/x86_64)
+INC    := $(addprefix -I, ../../include/ ../../include/platforms/x86_64-systemv-abi)
 
 all: ${TARGET}
 

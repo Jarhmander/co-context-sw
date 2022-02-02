@@ -7,7 +7,7 @@
  * @copyright see LICENSE
  */
 #include "context.h"
-#include "platforms/cortex-m0/context_impl.h"
+#include "platforms/cortex-m0-eabi/context_impl.h"
 //--------------------------------------------------------------------------------------------------
 
 void init_ctx(struct ctx_t *init, void (*fn)(void *), void *stack_bottom, size_t sz)
